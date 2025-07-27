@@ -43,24 +43,14 @@ contract DeployUniswap is Script {
         console2.log("Pair created at:", pair);
 
         // Get the correct token order (token0 < token1)
-        (address token0, address token1) = address(tokenA) < address(tokenB) 
-            ? (address(tokenA), address(tokenB)) 
-            : (address(tokenB), address(tokenA));
+        (address token0, address token1) =
+            address(tokenA) < address(tokenB) ? (address(tokenA), address(tokenB)) : (address(tokenB), address(tokenA));
 
         console2.log("Token0:", token0);
         console2.log("Token1:", token1);
 
         // Add Liquidity with correct token order
-        router.addLiquidity(
-            token0,
-            token1,
-            10_000 ether,
-            10_000 ether,
-            0,
-            0,
-            msg.sender,
-            block.timestamp + 1000
-        );
+        router.addLiquidity(token0, token1, 10_000 ether, 10_000 ether, 0, 0, msg.sender, block.timestamp + 1000);
 
         console2.log("Liquidity added. Deployer:", msg.sender);
 
