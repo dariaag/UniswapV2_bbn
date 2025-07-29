@@ -3,7 +3,7 @@
     {
       "hash": "0x982e0102fb6728efaab4a7ecaa62a86741d2764e8ead38028e53b54743c390eb",
       "transactionType": "CREATE",
-      "contractName": "WETH9",
+      "contractName": "WBABY9",
       "contractAddress": "0x458b7af49831eef607e9c447eacd39cd42be6c40",
       "function": null,
       "arguments": null,

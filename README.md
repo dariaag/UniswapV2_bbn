@@ -8,7 +8,7 @@ This project contains a complete Uniswap V2 deployment setup with custom ERC20 t
 uniswap-v2-deploy/
 ├── src/
 │   ├── CustomERC20.sol          # Custom ERC20 token implementation
-│   ├── WETH9.sol               # Wrapped ETH implementation
+│   ├── WBABY9.sol               # Wrapped ETH implementation
 │   └── uniswap-v2/            # Updated Uniswap V2 contracts
 │       ├── IUniswapV2Factory.sol
 │       ├── IUniswapV2Pair.sol
@@ -44,13 +44,41 @@ uniswap-v2-deploy/
    # Edit .env with your values
    ```
 
+## 🌐 Network Support
+
+### Supported Networks
+
+| Network | RPC URL | Native Token | Faucet |
+|---------|---------|--------------|---------|
+| **Babylon Edge Devnet** | `https://evm-rpc.edge-devnet.babylonlabs.io` | BABL | [Babylon Faucet](https://faucet.babylonchain.io/) |
+| **Ethereum Sepolia** | `https://sepolia.infura.io/v3/YOUR_KEY` | ETH | [Sepolia Faucet](https://sepoliafaucet.com/) |
+| **Polygon Mumbai** | `https://polygon-mumbai.infura.io/v3/YOUR_KEY` | MATIC | [Mumbai Faucet](https://faucet.polygon.technology/) |
+| **BSC Testnet** | `https://data-seed-prebsc-1-s1.binance.org:8545` | BNB | [BSC Faucet](https://testnet.binance.org/faucet-smart) |
+
+### Getting Test Tokens
+
+#### Babylon Edge Devnet (BABL)
+```bash
+# Visit the Babylon faucet
+# https://faucet.babylonchain.io/
+# Enter your wallet address: 0x091f743Be00ae62c3179a24f819b013FE250FfD2
+```
+
+#### Other Networks
+- **Sepolia**: Visit [sepoliafaucet.com](https://sepoliafaucet.com/)
+- **Mumbai**: Visit [polygon.technology/faucet](https://faucet.polygon.technology/)
+- **BSC Testnet**: Visit [testnet.binance.org/faucet-smart](https://testnet.binance.org/faucet-smart)
+
 ## ⚙️ Configuration
 
 ### Environment Variables (.env)
 ```bash
-RPC_URL="your_rpc_endpoint_here"
+# For Babylon Edge Devnet
+RPC_URL="https://evm-rpc.edge-devnet.babylonlabs.io"
 PRIVATE_KEY="your_private_key_here"
 ADDRESS="your_wallet_address_here"
+
+# For other networks, replace RPC_URL accordingly
 ```
 
 ### Foundry Configuration (foundry.toml)
@@ -135,26 +163,31 @@ Liquidity added. Deployer: 0x...
 
 ### Common Issues
 
-1. **Nonce Mismatch Error**
+1. **"Estimated amount required: X ETH" but need different token**
+   - **Solution**: Get native tokens for your network (BABL for Babylon, MATIC for Polygon, etc.)
+   - **Babylon**: Visit [faucet.babylonchain.io](https://faucet.babylonchain.io/)
+   - **Other networks**: Use appropriate faucets listed above
+
+2. **Nonce Mismatch Error**
    ```bash
    # Use --slow flag to handle nonce issues
    forge script script/DeployUniswap.s.sol --fork-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --legacy --slow
    ```
 
-2. **EIP-1559 Fee Error**
+3. **EIP-1559 Fee Error**
    ```bash
    # Use --legacy flag for legacy transactions
    forge script script/DeployUniswap.s.sol --fork-url $RPC_URL --private-key $PRIVATE_KEY --broadcast --legacy
    ```
 
-3. **Compilation Errors**
+4. **Compilation Errors**
    ```bash
    # Clean and rebuild
    forge clean
    forge build
    ```
 
-4. **Environment Variables Not Set**
+5. **Environment Variables Not Set**
    ```bash
    # Source environment file
    source .env
@@ -162,8 +195,9 @@ Liquidity added. Deployer: 0x...
 
 ### Network-Specific Notes
 
-- **Testnets**: Use appropriate RPC URLs (Sepolia, Goerli, etc.)
-- **Mainnet**: Ensure sufficient ETH for gas fees
+- **Babylon Edge Devnet**: Uses BABL tokens, get from [Babylon Faucet](https://faucet.babylonchain.io/)
+- **Testnets**: Use appropriate RPC URLs and native tokens
+- **Mainnet**: Ensure sufficient native tokens for gas fees
 - **Private Networks**: Adjust gas settings as needed
 
 ## 📊 Contract Addresses

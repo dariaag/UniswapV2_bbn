@@ -6,14 +6,14 @@ import "forge-std/console2.sol";
 import "../src/uniswap-v2/UniswapV2Factory.sol";
 import "../src/uniswap-v2/UniswapV2Router02.sol";
 import "../src/CustomERC20.sol";
-import "../src/WETH9.sol";
+import "../src/WBABY9.sol";
 
 contract DeployUniswap is Script {
     function run() external {
         vm.startBroadcast();
 
         // Deploy WETH
-        WETH9 weth = new WETH9();
+        WBABY9 weth = new WBABY9();
         console2.log("WETH deployed at:", address(weth));
 
         // Deploy Uniswap Factory
